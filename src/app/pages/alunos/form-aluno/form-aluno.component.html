@@ -1,0 +1,24 @@
+<div class="content" role="main">
+  <h3 *ngIf="isAddMode">Adicionar Aluno</h3>
+  <h3 *ngIf="!isAddMode">Editar Aluno</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+          <div class="form-group col-5">
+            <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Nome</mat-label>
+              <input matInput type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }">
+              <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                  <div *ngIf="f.nome.errors.required">Descrição é requerida</div>
+              </div>
+            </mat-form-field>
+          </div>
+      </div>
+      <div class="form-group">
+          <button mat-raised-button color="primary" [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Salvar
+          </button>
+          <button mat-button color="warn" routerLink="/alunos" class="btn btn-link">Cancelar</button>
+      </div>
+  </form>
+</div>

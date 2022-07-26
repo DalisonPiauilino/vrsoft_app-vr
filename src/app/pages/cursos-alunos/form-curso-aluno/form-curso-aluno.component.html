@@ -1,0 +1,37 @@
+<div class="content" role="main">
+  <h3 *ngIf="isAddMode">Adicionar Matrícula</h3>
+  <h3 *ngIf="!isAddMode">Editar Matricula</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+          <div class="form-group col-5">
+            <mat-form-field appearance="fill">
+              <mat-label>Aluno</mat-label>
+              <mat-select [(ngModel)]="selectedAluno" formControlName="aluno" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.aluno.errors }">
+                <mat-option *ngFor="let aluno of listAlunos" [value]="aluno.nome">{{aluno.nome}}</mat-option>
+              </mat-select>
+              <div *ngIf="submitted && f.aluno.errors" class="invalid-feedback">
+                  <div *ngIf="f.aluno.errors.required">Aluno é requerido</div>
+              </div>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-5">
+            <mat-form-field appearance="fill">
+              <mat-label>Curso</mat-label>
+              <mat-select [(ngModel)]="selectedCurso" formControlName="curso" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.curso.errors }">
+                <mat-option *ngFor="let curso of listCursos" [value]="curso.descricao">{{curso.descricao}}</mat-option>
+              </mat-select>
+              <div *ngIf="submitted && f.curso.errors" class="invalid-feedback">
+                  <div *ngIf="f.curso.errors.required">Curso é requerido</div>
+              </div>
+            </mat-form-field>
+          </div>
+      </div>
+      <div class="form-group">
+          <button mat-raised-button color="primary" [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Salvar
+          </button>
+          <button mat-button color="warn" routerLink="/cursos" class="btn btn-link">Cancelar</button>
+      </div>
+  </form>
+</div>

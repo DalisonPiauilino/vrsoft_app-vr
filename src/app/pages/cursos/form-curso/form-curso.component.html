@@ -1,0 +1,33 @@
+<div class="content" role="main">
+  <h3 *ngIf="isAddMode">Adicionar Curso</h3>
+  <h3 *ngIf="!isAddMode">Editar Curso</h3>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+          <div class="form-group col-5">
+            <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Descrição</mat-label>
+              <input matInput type="text" formControlName="descricao" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.descricao.errors }">
+              <div *ngIf="submitted && f.descricao.errors" class="invalid-feedback">
+                  <div *ngIf="f.descricao.errors.required">Descrição é requerida</div>
+              </div>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-5">
+            <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Ementa</mat-label>
+              <input matInput type="text" formControlName="ementa" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ementa.errors }">
+              <div *ngIf="submitted && f.ementa.errors" class="invalid-feedback">
+                  <div *ngIf="f.ementa.errors.required">Ementa é requerida</div>
+              </div>
+            </mat-form-field>
+          </div>
+      </div>
+      <div class="form-group">
+          <button mat-raised-button color="primary" [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              {{isAddMode ? 'Salvar' : 'Alterar'}}
+          </button>
+          <button mat-button color="warn" routerLink="/cursos" class="btn btn-link">Cancelar</button>
+      </div>
+  </form>
+</div>

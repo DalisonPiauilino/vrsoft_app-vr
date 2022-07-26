@@ -1,0 +1,45 @@
+<div class="content" role="main">
+  <h3>
+    Matrículas
+  </h3>
+  <div class="button-add">
+    <button mat-button color="primary" routerLink="add">Cadastrar</button>
+  </div>
+  <ngx-datatable
+    class="material"
+    [rows]="CursoAlunoRows"
+    [columns]="CursoAlunoColumns"
+    [columnMode]="ColumnMode.standard"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [externalPaging]="true"
+    [count]="page.totalElements"
+    [offset]="page.pageNumber"
+    [limit]="page.size"
+    (page)="setCursoPage($event)"
+  >
+    <!-- <ngx-datatable-column name="codigo">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column> -->
+    <ngx-datatable-column name="aluno">
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="curso" >
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="actions" prop="name">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <button mat-mini-fab color="primary" aria-label="Editar" (click)="edit(row)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
